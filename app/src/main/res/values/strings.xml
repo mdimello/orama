@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Órama</string>
+
+    <string name="fund_list_title">Fundos de\n Investimento</string>
+    <string name="fund_list_description">Conheça a nossa lista de fundos</string>
+    <string name="fund_list_filter_button">Filtrar</string>
+
+</resources>
