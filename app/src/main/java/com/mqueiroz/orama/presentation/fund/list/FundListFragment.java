@@ -11,6 +11,20 @@ import com.mqueiroz.orama.R;
 
 public class FundListFragment extends Fragment implements FundListContract.View
 {
+    private FundListContract.Presenter mPresenter;
+
+
+
+    @Override
+    public void onCreate( Bundle savedInstanceState )
+    {
+        super.onCreate( savedInstanceState );
+
+        mPresenter = new FundListPresenter( this );
+    }
+
+
+
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState )
     {
@@ -18,5 +32,4 @@ public class FundListFragment extends Fragment implements FundListContract.View
 
         return view;
     }
-
 }

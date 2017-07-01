@@ -5,13 +5,71 @@
               android:background="@color/background"
               android:orientation="vertical">
 
-
-    <EditText
-        android:id="@+id/editText"
+    <RelativeLayout
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hello, World!"/>
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/header_background"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fund_list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="@string/fund_list_title"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/fund_list_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fund_list_description"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:background="@android:color/white"
+        android:drawableLeft="@drawable/ic_filter_list_grey_600_18dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_filter_list_grey_600_18dp"
+        android:elevation="2dp"
+        android:paddingEnd="24dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="24dp"
+        android:paddingStart="20dp"
+        android:text="@string/fund_list_filter_button"
+        android:textColor="@color/grey_600"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
