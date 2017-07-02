@@ -3,7 +3,13 @@
     <color name="colorPrimary">#54862a</color>
     <color name="colorPrimaryDark">#37581c</color>
 
+    <color name="accent_blue">#119c9f</color>
+
     <color name="background">#EEEEEE</color>
     <color name="grey_600">#757575</color>
+
+    <color name="green">#2E7D32</color>
+    <color name="yellow">#ffa000</color>
+    <color name="red">#e53935</color>
     
 </resources>

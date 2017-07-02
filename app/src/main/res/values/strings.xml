@@ -4,5 +4,8 @@
     <string name="fund_list_title">Fundos de\n Investimento</string>
     <string name="fund_list_description">Conheça a nossa lista de fundos</string>
     <string name="fund_list_filter_button">Filtrar</string>
+    <string name="fund_list_item_invest">Aplicar</string>
+    <string name="fund_list_item_info">Saber Mais</string>
+    <string name="fund_list_error">Ocorreu um erro!</string>
 
 </resources>

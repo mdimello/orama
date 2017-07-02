@@ -31,8 +31,11 @@ class FundListPresenter implements FundListContract.Presenter
             @Override
             public void onResponse( @NonNull Call<List<Fund>> call, @NonNull Response<List<Fund>> response )
             {
-                mFunds = response.body( );
-                mView.setData( mFunds );
+                if( response.body( ) != null )
+                {
+                    mFunds = response.body( );
+                    mView.setListItems( mFunds );
+                }
             }
 
 

@@ -13,12 +13,14 @@ android {
     }
     buildTypes {
         debug{
-            buildConfigField("String", "API_HOST", "\"https://s3.amazonaws.com/\"")
+            buildConfigField("String", "API_HOST", "\"http://192.168.0.4/\"")
+            buildConfigField("String", "API_ADDRESS", "\"orama-media/json/fund_detail_full.json\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_HOST", "\"https://s3.amazonaws.com/\"")
+            buildConfigField("String", "API_ADDRESS", "\"orama-media/json/fund_detail_full.json?limit=1000&offset=0&serializer=fund_detail_full\"")
         }
     }
     productFlavors {
@@ -33,6 +35,7 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
