@@ -93,7 +93,8 @@
             <TextView
                 android:id="@+id/fund_list_error"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:text="@string/fund_list_error"
                 android:textAppearance="@android:style/TextAppearance.Medium"
@@ -104,7 +105,8 @@
             <TextView
                 android:id="@+id/fund_list_empty"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:text="@string/fund_list_empty"
                 android:textAppearance="@android:style/TextAppearance.Medium"

@@ -11,6 +11,6 @@ import retrofit2.http.GET;
 
 public interface ApiService
 {
-    @GET( BuildConfig.API_ADDRESS )
+    @GET( "orama-media/json/fund_detail_full.json?limit=1000&offset=0&serializer=fund_detail_full" )
     Call<List<Fund>> getFunds( );
 }

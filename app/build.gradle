@@ -13,14 +13,12 @@ android {
     }
     buildTypes {
         debug{
-            buildConfigField("String", "API_HOST", "\"http://192.168.0.4/\"")
-            buildConfigField("String", "API_ADDRESS", "\"orama-media/json/fund_detail_full.json\"")
+            buildConfigField("String", "API_HOST", "\"https://s3.amazonaws.com/\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_HOST", "\"https://s3.amazonaws.com/\"")
-            buildConfigField("String", "API_ADDRESS", "\"orama-media/json/fund_detail_full.json?limit=1000&offset=0&serializer=fund_detail_full\"")
         }
     }
     productFlavors {
