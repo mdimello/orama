@@ -1,8 +1,10 @@
 package com.mqueiroz.orama.presentation.fund.list;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.mqueiroz.orama.R;
 import com.mqueiroz.orama.domain.Fund;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,9 +37,14 @@ public class FundListFragment extends Fragment implements FundListContract.View
     @BindView( R.id.fund_list_error )
     TextView mErrorView;
 
+    @BindView( R.id.fund_list_empty )
+    TextView mEmptyView;
+
     @BindView( R.id.fund_list_recycler_view )
     RecyclerView mRecyclerView;
     FundListAdapter mAdapter;
+
+    private List<Integer> mFilterSelectedItems = new ArrayList<>( );
 
 
 
@@ -46,6 +54,10 @@ public class FundListFragment extends Fragment implements FundListContract.View
         super.onCreate( savedInstanceState );
 
         mPresenter = new FundListPresenter( this );
+
+        mFilterSelectedItems.add( 1 );
+        mFilterSelectedItems.add( 2 );
+        mFilterSelectedItems.add( 3 );
     }
 
 
@@ -56,6 +68,66 @@ public class FundListFragment extends Fragment implements FundListContract.View
         View view = inflater.inflate( R.layout.fragment_fund_list, container, false );
 
         ButterKnife.bind( this, view );
+
+        mFilterButton.setOnClickListener( new View.OnClickListener( )
+        {
+            @Override
+            public void onClick( View v )
+            {
+                boolean[] isSelected = { false, false, false };
+                for( int i = 0; i < mFilterSelectedItems.size( ); i++ )
+                {
+                    switch( mFilterSelectedItems.get( i ) )
+                    {
+                        case 1:
+                            isSelected[0] = true;
+                            break;
+                        case 2:
+                            isSelected[1] = true;
+                            break;
+                        case 3:
+                            isSelected[2] = true;
+                            break;
+                    }
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder( getActivity( ) );
+                // Set the dialog title
+                builder.setTitle( "Filtro" )
+                        // Specify the list array, the items to be selected by default (null for none),
+                        // and the listener through which to receive callbacks when items are selected
+                        .setMultiChoiceItems( R.array.suitability_profiles,
+                                isSelected,
+                                new DialogInterface.OnMultiChoiceClickListener( )
+                                {
+                                    @Override
+                                    public void onClick( DialogInterface dialog, int which, boolean isChecked )
+                                    {
+                                        which++;
+                                        if( isChecked )
+                                        {
+                                            // If the user checked the item, add it to the selected items
+                                            mFilterSelectedItems.add( which );
+                                        }
+                                        else if( mFilterSelectedItems.contains( which ) )
+                                        {
+                                            // Else, if the item is already in the array, remove it
+                                            mFilterSelectedItems.remove( Integer.valueOf( which ) );
+                                        }
+                                    }
+                                } ).setPositiveButton( "Ok", new DialogInterface.OnClickListener( )
+                {
+                    @Override
+                    public void onClick( DialogInterface dialog, int id )
+                    {
+                        mPresenter.setSuitabilityFilter( mFilterSelectedItems );
+                    }
+                } );
+
+                AlertDialog dialog = builder.create( );
+                dialog.show( );
+            }
+        } );
 
         mAdapter = new FundListAdapter( new FundListItemViewHolder.OnListItemClick( )
         {
@@ -85,22 +157,35 @@ public class FundListFragment extends Fragment implements FundListContract.View
 
 
     @Override
-    public void setListItems( List<Fund> funds )
+    public void displayError( )
     {
         mLoadingView.setVisibility( View.GONE );
-        mErrorView.setVisibility( View.GONE );
-        mRecyclerView.setVisibility( View.VISIBLE );
-
-        mAdapter.setListItems( funds );
+        mErrorView.setVisibility( View.VISIBLE );
+        mEmptyView.setVisibility( View.GONE );
+        mRecyclerView.setVisibility( View.GONE );
     }
 
 
 
     @Override
-    public void displayError( )
+    public void displayEmptyList( )
     {
         mLoadingView.setVisibility( View.GONE );
-        mErrorView.setVisibility( View.VISIBLE );
+        mErrorView.setVisibility( View.GONE );
+        mEmptyView.setVisibility( View.VISIBLE );
         mRecyclerView.setVisibility( View.GONE );
+    }
+
+
+
+    @Override
+    public void setListItems( List<Fund> funds )
+    {
+        mLoadingView.setVisibility( View.GONE );
+        mErrorView.setVisibility( View.GONE );
+        mEmptyView.setVisibility( View.GONE );
+        mRecyclerView.setVisibility( View.VISIBLE );
+
+        mAdapter.setListItems( funds );
     }
 }

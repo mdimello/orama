@@ -7,6 +7,7 @@ import com.mqueiroz.orama.data.ApiService;
 import com.mqueiroz.orama.data.ApiUtils;
 import com.mqueiroz.orama.domain.Fund;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,6 +19,7 @@ class FundListPresenter implements FundListContract.Presenter
     private FundListContract.View mView;
 
     private List<Fund> mFunds;
+    private List<Fund> mFilteredFunds;
 
 
 
@@ -34,7 +36,9 @@ class FundListPresenter implements FundListContract.Presenter
                 if( response.body( ) != null )
                 {
                     mFunds = response.body( );
-                    mView.setListItems( mFunds );
+                    mFilteredFunds = new ArrayList<>( mFunds );
+
+                    displayList( );
                 }
             }
 
@@ -46,5 +50,47 @@ class FundListPresenter implements FundListContract.Presenter
                 mView.displayError( );
             }
         } );
+    }
+
+
+
+    @Override
+    public void setSuitabilityFilter( List<Integer> suitability )
+    {
+        mFilteredFunds = new ArrayList<>( mFunds );
+
+        for( int i = mFunds.size( ) - 1; i >= 0; i-- )
+        {
+            boolean contained = false;
+
+            for( int j = 0; j < suitability.size( ); j++ )
+            {
+                if( mFunds.get( i ).getSuitabilityProfile( ) == suitability.get( j ) )
+                {
+                    contained = true;
+                }
+            }
+
+            if( ! contained )
+            {
+                mFilteredFunds.remove( i );
+            }
+        }
+
+        displayList( );
+    }
+
+
+
+    private void displayList( )
+    {
+        if( mFilteredFunds.size( ) > 0 )
+        {
+            mView.setListItems( mFilteredFunds );
+        }
+        else
+        {
+            mView.displayEmptyList( );
+        }
     }
 }

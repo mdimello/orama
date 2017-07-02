@@ -7,5 +7,13 @@
     <string name="fund_list_item_invest">Aplicar</string>
     <string name="fund_list_item_info">Saber Mais</string>
     <string name="fund_list_error">Ocorreu um erro!</string>
+    <string name="fund_list_empty">Nenhum fundo encontrado.</string>
+
+
+    <array name="suitability_profiles">
+        <item>Conservador</item>
+        <item>Moderado</item>
+        <item>Experiente</item>
+    </array>
 
 </resources>

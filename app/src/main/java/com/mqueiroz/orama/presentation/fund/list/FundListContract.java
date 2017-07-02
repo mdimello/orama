@@ -9,16 +9,19 @@ interface FundListContract
 {
     interface View
     {
-        void setListItems( List<Fund> funds );
-
-
         void displayError( );
+
+
+        void displayEmptyList( );
+
+
+        void setListItems( List<Fund> funds );
     }
 
 
 
     interface Presenter
     {
-
+        void setSuitabilityFilter( List<Integer> suitability );
     }
 }
